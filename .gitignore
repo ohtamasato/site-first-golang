@@ -4,3 +4,4 @@
 # Docker local files
 /docker/MySQL/mysql_init/*
 /docker/MySQL/mysql_data/*
+/src/github.com/*
