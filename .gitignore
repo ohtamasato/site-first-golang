@@ -5,3 +5,6 @@
 /docker/MySQL/mysql_init/*
 /docker/MySQL/mysql_data/*
 /src/github.com/*
+
+# Build
+/src/app/app
