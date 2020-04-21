@@ -16,7 +16,7 @@ $ docker version
 Then you also need to run the below commands:
 
 ```sh
-docker-compose up -d --build
+$ docker-compose up -d --build
 ```
 
 Although, to avoid using Docker cache:
