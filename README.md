@@ -18,3 +18,9 @@ Then you also need to run the below commands:
 ```sh
 docker-compose up -d --build
 ```
+
+Although, to avoid using Docker cache:
+
+```sh
+$ docker-compose build --no-cache && docker-compose up -d --no-build
+```
