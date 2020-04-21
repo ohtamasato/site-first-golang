@@ -1,10 +1,20 @@
 # site-first-golang
 It's my first experience with Golang.
 
-## Installation of environment
-To install Golang on Macintosh:
+## Installation for development
+You need Docker to run / develop this app:
+
+1. Visit https://hub.docker.com/editions/community/docker-ce-desktop-mac/
+2. Get Docker Desktop
+3. Install Docker Desktop
+4. Check below:
 
 ```sh
-$ brew install go
-$ go version
+$ docker version
+```
+
+Then you also need to run the below commands:
+
+```sh
+docker-compose up -d --build
 ```
