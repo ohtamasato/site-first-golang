@@ -1,2 +1,6 @@
 # IDE project directory
 .idea
+
+# Docker local files
+/docker/MySQL/mysql_init/*
+/docker/MySQL/mysql_data/*
