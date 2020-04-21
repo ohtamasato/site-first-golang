@@ -20,7 +20,8 @@ services:
     build:
       context: ./docker/Go
     volumes:
-      - "./src:/go/src/app"
+      - ./src:/go/src
+    command: /bin/sh -c "if [ -e /home/root/go/src ]; then cp -n -R /home/root/go/src /go && rm -rf /home/root/go; fi; cd /go/src/app && bee run"
     container_name: go_app
     ports:
       - "8080:8080"

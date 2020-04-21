@@ -12,3 +12,6 @@ RUN apt-get update \
 RUN bee new app
 WORKDIR /go/src/app
 CMD ["bee", "run"]
+
+RUN mkdir -p /home/root/go
+RUN cp -R /go/src /home/root/go
