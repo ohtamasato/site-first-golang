@@ -1,0 +1,44 @@
+version: "3.5"
+services:
+  db:
+    build:
+      context: ./docker/MySQL
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test_db
+      MYSQL_USER: test
+      MYSQL_PASSWORD: password
+    container_name: go_db
+    ports:
+      - 127.0.0.1:3306:3306
+    networks:
+      app_net:
+        ipv4_address: 172.30.0.2
+    tty: true
+    volumes:
+      - ./docker/MySQL/mysql_init:/docker-entrypoint-initdb.d
+      - ./docker/MySQL/mysql_data:/var/lib/mysql
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci --skip-character-set-client-handshake
+  app:
+    build:
+      context: ./docker/Go
+    volumes:
+      - ./src:/go/src
+    command: /bin/sh -c "if [ -e /home/root/go/src ]; then cp -n -R /home/root/go/src /go && rm -rf /home/root/go; fi; cd /go/src/app && bee run"
+    container_name: go_app
+    ports:
+      - "8080:8080"
+    networks:
+      app_net:
+        ipv4_address: 172.30.0.3
+    tty: true
+    depends_on:
+      - db
+networks:
+  app_net:
+    name: go_net
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.30.0.0/24
