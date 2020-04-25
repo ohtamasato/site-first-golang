@@ -119,6 +119,8 @@ func (c *UserController) GetAll() {
 	l, err := models.GetAllUser(query, fields, sortby, order, offset, limit)
 	if err != nil {
 		c.Data["json"] = err.Error()
+	} else if l == nil {
+		c.Data["json"] = make([]models.User, 0)
 	} else {
 		c.Data["json"] = l
 	}
