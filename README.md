@@ -43,3 +43,22 @@ To delete the containers:
 $ docker stop go_app && docker stop go_db && docker rm go_app && docker rm go_db
 ```
 
+## Customized behaviour
+As commit `#830fcb6` statemented, empty slice should return `[]` instead of `null` in JSON.
+Generated controllers by `bee generate scaffold <model>` originally returns `null` though,
+it's not normal to popular JSON. Please add the below code to every generated controller:
+
+```go
+func (c *UserController) GetAll() {
+	// var fields []string....
+	
+	if err != nil {
+		c.Data["json"] = err.Error()
+	} else if l == nil {
+		c.Data["json"] = make([]models.User, 0) // <--- Add this one
+	} else {
+		c.Data["json"] = l
+	}
+	c.ServeJSON()
+}
+```
