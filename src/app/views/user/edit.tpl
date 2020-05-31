@@ -1,1 +1,0 @@
-/go/src/app/views/user/edit.tpl
